@@ -55,10 +55,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: black;
         font-weight: bold;
       }
-      .drawer-list a.subroute {
-        padding-left: 32px;
-      }
-
 
     </style>
 
@@ -75,9 +71,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer>
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">View One</a>
-          <a name="view2" href="/view2">View Two</a>
-          <a name="view3" href="/view3">View Three</a>
+          <!-- Try to implement iron-pages with iron-selector at once. -->
+          <a name="dashboard" href="/dashboard">Dashboard</a>
+          <a name="sales" href="/sales">Sales</a>
+          <a name="transactions" href="/transactions">Transactions</a>
+          <a name="reports" href="/reports">Reports</a>
+          <a name="schedule" href="/schedule">Schedule</a>
         </iron-selector>
       </app-drawer>
 
@@ -92,9 +91,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-header>
 
         <iron-pages role="main" selected="[[page]]" attr-for-selected="name">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
+          <dash-dashboard name="dashboard"></dash-dashboard>
+          <dash-sales name="sales"></dash-sales>
+          <dash-transactions name="transactions"></dash-transactions>
+          <dash-reports name="reports"></dash-reports>
+          <dash-schedule name="schedule"></dash-schedule>
         </iron-pages>
 
       </app-header-layout>
@@ -120,7 +121,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       observers: [
-        '_routePageChanged(routeData.page)'
+        '_routePageChanged(routeData.page)',
       ],
 
       _routePageChanged: function(page) {
@@ -130,7 +131,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _pageChanged: function(page) {
         // load page import on demand.
         this.importHref(
-          this.resolveUrl('my-' + page + '.html'), null, null, true);
+          this.resolveUrl('views/dash-' + page + '.html'), null, null, true);
       }
 
     });

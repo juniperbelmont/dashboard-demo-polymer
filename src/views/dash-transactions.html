@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
 
 <dom-module id="dash-transactions">
 
@@ -17,7 +18,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
       :host {
         display: block;
-        padding: 10px;
       }
       .card {
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
@@ -45,12 +45,40 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <div class="card">
-      <div class="circle">1</div>
-      <h1>Transactions</h1>
-      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
-    </div>
+    <vaadin-grid id="transactions" selection-mode="multi">
+      <table>
+        <colgroup>
+          <col name="time">
+          <col name="country">
+          <col name="city">
+          <col name="theater">
+          <col name="room">
+          <col name="title">
+          <col name="seat">
+          <col name="price">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
+            <th>E</th>
+            <th>F</th>
+            <th>G</th>
+            <th>H</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <td>
+              Total
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+    </vaadin-grid>
 
   </template>
 
@@ -58,7 +86,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     Polymer({
 
-      is: 'dash-transactions'
+      is: 'dash-transactions',
+
+      ready: function () {
+        var transactions = this.$.transactions;
+
+        var data = [
+          ['Time 1', 'Place 1', 'Country 1', 'City 1', 'Theater 1', 1, 'Title 1', 'Seat 1', 1.10],
+          ['Time 2', 'Place 2', 'Country 2', 'City 2', 'Theater 2', 2, 'Title 2', 'Seat 2', 2.20],
+          ['Time 3', 'Place 3', 'Country 3', 'City 3', 'Theater 3', 3, 'Title 3', 'Seat 3', 3.30],
+          ['Time 4', 'Place 4', 'Country 4', 'City 4', 'Theater 4', 4, 'Title 4', 'Seat 4', 4.40]
+        ];
+
+        transactions.items = function(params, callback) {
+          callback(data.slice(params.index, params.index + params.count));
+        };
+
+        transactions.size = data.length
+      }
 
     });
 

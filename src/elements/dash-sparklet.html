@@ -1,0 +1,51 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<!-- Element for displaying a sparkline chart and stuff around it. -->
+<dom-module id="dash-sparklet">
+    <template>
+      <div>Value: {{bigValue}} - {{testText}}</div>
+
+      <big-value></big-value>
+
+      <label for=""></label>
+
+      <sparkline></sparkline>
+
+      <high></high>
+
+      <low></low>
+    </template>
+
+    <script>
+    Polymer({
+        is: 'dash-sparklet',
+
+        properties: {
+          data: {
+            type: Array,
+            value: []
+          },
+          bigValue: Number,
+          testText: String
+        },
+
+        // Fires when an instance of the element is created
+        created: function() {},
+
+        // Fires when the local DOM has been fully prepared
+        ready: function() {
+          console.log(this.data)
+          this.bigValue = this.data.reduce(function(a,b) {return a + b}, 0);
+        },
+
+        // Fires when the element was inserted into the document
+        attached: function() {},
+
+        // Fires when the element was removed from the document
+        detached: function() {},
+
+        // Fires when an attribute was added, removed, or updated
+        attributeChanged: function(name, type) {}
+    });
+    </script>
+</dom-module>

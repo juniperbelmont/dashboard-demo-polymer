@@ -20,7 +20,7 @@
     <h1>Dashboard</h1>
 
     <dash-sparkbox>
-      <dash-sparklet id="firstSpark"></dash-sparklet>
+      <dash-sparklet id="traffic" suffix="K" label="Traffic"></dash-sparklet>
       <dash-sparklet></dash-sparklet>
       <dash-sparklet></dash-sparklet>
       <dash-sparklet></dash-sparklet>
@@ -40,9 +40,8 @@
 
       is: 'dash-dashboard',
 
-      ready: function() {
-        this.$.firstSpark.data = [1,2,3];
-        this.$.firstSpark.testText = 'floozy';
+      attached: function() {
+        this.$.traffic.data = [1,2,3];
       }
 
     });

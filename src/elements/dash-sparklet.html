@@ -1,19 +1,52 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/vaadin-charts/vaadin-charts.html">
 
 <!-- Element for displaying a sparkline chart and stuff around it. -->
 <dom-module id="dash-sparklet">
+    <style>
+      :host {
+        padding: 12px;
+        box-sizing: border-box;
+        border: 1px solid #EAEAEA;
+        background-color: white;
+        display: inline-block;
+        text-align: center;
+
+      }
+
+      .average {
+        font-size: 26px;
+      }
+
+      .label {
+        font-size: 14px;
+      }
+
+      .high, .low {
+        display: inline-block;
+      }
+      /* TODO: Color of line should be set with a variable. */
+    </style>
     <template>
-      <div>Value: {{bigValue}} - {{testText}}</div>
+      <div class="average">
+        [[prefix]][[average]][[suffix]]
+      </div>
 
-      <big-value></big-value>
+      <div class="label">
+        [[label]]
+      </div>
 
-      <label for=""></label>
-
-      <sparkline></sparkline>
-
-      <high></high>
-
-      <low></low>
+      <vaadin-sparkline id="chart"></vaadin-sparkline>
+      <div class="bottom">
+        <div class="high">
+          High
+          <b>[[_high(data)]]</b>
+        </div>
+        <div class="low">
+          Low
+          <b>[[_low(data)]]</b>
+        </div>
+      </div>
     </template>
 
     <script>
@@ -23,29 +56,49 @@
         properties: {
           data: {
             type: Array,
-            value: []
+            value: () => []
           },
-          bigValue: Number,
-          testText: String
+
+          average: {
+            type: Number,
+            computed: '_average(data)'
+          },
+
+          prefix: String,
+          suffix: String
         },
+
+        _average: function(data) {
+          // return 0 as a fallback
+          return data.reduce((a, b) => a + b, 0) / data.length || 0;
+        },
+
+        _high: (data) => data.length ? Math.max(...data) : 0,
+        _low: (data) => data.length ? Math.min(...data): 0,
 
         // Fires when an instance of the element is created
         created: function() {},
 
         // Fires when the local DOM has been fully prepared
         ready: function() {
-          console.log(this.data)
-          this.bigValue = this.data.reduce(function(a,b) {return a + b}, 0);
+
         },
 
         // Fires when the element was inserted into the document
-        attached: function() {},
+        attached: function() {
+          this.async(function() {
+            console.log(this.data)
+            $$("#chart").data = this.data;
+          });
+        },
 
         // Fires when the element was removed from the document
         detached: function() {},
 
         // Fires when an attribute was added, removed, or updated
-        attributeChanged: function(name, type) {}
+        attributeChanged: function(name, type) {
+
+        }
     });
     </script>
 </dom-module>

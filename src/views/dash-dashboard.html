@@ -15,6 +15,17 @@
         margin: 16px 0;
         color: #212121;
       }
+
+      dash-sparkbox {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
+
+      dash-sparklet {
+        width: 25%;
+
+      }
     </style>
 
     <h1>Dashboard</h1>
@@ -41,7 +52,7 @@
       is: 'dash-dashboard',
 
       attached: function() {
-        this.$.traffic.data = [1,2,3];
+        this.$.traffic.data = [1,5,4,8,3,2,2,6,8,3];
       }
 
     });

@@ -3,15 +3,21 @@
 
 <!-- Element for displaying a sparkline chart and stuff around it. -->
 <dom-module id="dash-sparklet">
+    <!-- Import flex layout classes. -->
+
     <style>
       :host {
         padding: 12px;
         box-sizing: border-box;
         border: 1px solid #EAEAEA;
         background-color: white;
-        display: inline-block;
+
+
         text-align: center;
 
+      }
+
+      :host > div {
       }
 
       .average {
@@ -22,9 +28,18 @@
         font-size: 14px;
       }
 
+      .bottom {
+
+      }
+
       .high, .low {
         display: inline-block;
       }
+
+      .chart {
+        height: 40px;
+      }
+
       /* TODO: Color of line should be set with a variable. */
     </style>
     <template>
@@ -36,7 +51,11 @@
         [[label]]
       </div>
 
-      <vaadin-sparkline id="chart"></vaadin-sparkline>
+      <div class="chart">
+        <vaadin-sparkline data={{data}}></vaadin-sparkline>
+      </div>
+
+
       <div class="bottom">
         <div class="high">
           High
@@ -86,10 +105,6 @@
 
         // Fires when the element was inserted into the document
         attached: function() {
-          this.async(function() {
-            console.log(this.data)
-            $$("#chart").data = this.data;
-          });
         },
 
         // Fires when the element was removed from the document

@@ -12,12 +12,10 @@
         border: 1px solid #EAEAEA;
         background-color: white;
 
+        display: flex;
+        flex-flow: column nowrap;
 
         text-align: center;
-
-      }
-
-      :host > div {
       }
 
       .average {
@@ -28,16 +26,13 @@
         font-size: 14px;
       }
 
-      .bottom {
-
-      }
-
       .high, .low {
         display: inline-block;
       }
 
       .chart {
-        height: 40px;
+        height: 20px;
+        padding: 15px 0;
       }
 
       /* TODO: Color of line should be set with a variable. */
@@ -59,11 +54,11 @@
       <div class="bottom">
         <div class="high">
           High
-          <b>[[_high(data)]]</b>
+          <b>[[high]]</b>
         </div>
         <div class="low">
           Low
-          <b>[[_low(data)]]</b>
+          <b>[[low]]</b>
         </div>
       </div>
     </template>
@@ -78,42 +73,37 @@
             value: () => []
           },
 
+          prefix: String,
+          suffix: String,
+          label: {
+            String,
+            value: '\xA0' // Inserts nonbreaking space when label is empty.
+          },
+
           average: {
             type: Number,
             computed: '_average(data)'
           },
 
-          prefix: String,
-          suffix: String
+          high: {
+            type: Number,
+            computed: '_high(data)'
+          },
+
+          low: {
+            type: Number,
+            computed: '_low(data)'
+          }
         },
 
         _average: function(data) {
           // return 0 as a fallback
-          return data.reduce((a, b) => a + b, 0) / data.length || 0;
+          return Math.floor(data.reduce((a, b) => a + b, 0) / data.length || 0);
         },
 
-        _high: (data) => data.length ? Math.max(...data) : 0,
-        _low: (data) => data.length ? Math.min(...data): 0,
 
-        // Fires when an instance of the element is created
-        created: function() {},
-
-        // Fires when the local DOM has been fully prepared
-        ready: function() {
-
-        },
-
-        // Fires when the element was inserted into the document
-        attached: function() {
-        },
-
-        // Fires when the element was removed from the document
-        detached: function() {},
-
-        // Fires when an attribute was added, removed, or updated
-        attributeChanged: function(name, type) {
-
-        }
+        _high: (data) => data.length ? Math.max(...data) : '--',
+        _low: (data) => data.length ? Math.min(...data): '--'
     });
     </script>
 </dom-module>

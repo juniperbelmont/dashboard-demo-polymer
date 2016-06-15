@@ -17,45 +17,86 @@
       }
 
       dash-sparkbox {
-        display: flex;
-        flex-direction: row;
         width: 100%;
+        /*
+        display: flex;
+        flex-flow: row wrap;
+        align-items: stretch;*/
+      }
+
+      .row {
+        /*flex: 1 1 auto;*/
+        display: flex;
       }
 
       dash-sparklet {
-        width: 25%;
+        /*flex: 1 1 auto;*/
+        min-width: 12em;
+        display: inline-block;
+      }
 
+
+      dash-chartbox {
+        display: block;
+        background-color: #ddd;
+        text-align: center;
       }
     </style>
 
     <h1>Dashboard</h1>
-
     <dash-sparkbox>
-      <dash-sparklet id="traffic" suffix="K" label="Traffic"></dash-sparklet>
-      <dash-sparklet></dash-sparklet>
-      <dash-sparklet></dash-sparklet>
-      <dash-sparklet></dash-sparklet>
+      <div class="row">
+        <dash-sparklet id="traffic" suffix="K" label="Traffic"></dash-sparklet>
+        <dash-sparklet id="daily-revenue" prefix="$" suffix="M" label="Revenue/day"></dash-sparklet>
+        <dash-sparklet id="checkout-time" suffix="s" label="Checkout Time"></dash-sparklet>
+        <dash-sparklet id="fill-rate" suffix="%" label="Theatre Fill Rate"></dash-sparklet>
+      </div>
+      <div class="row">
+
+      </div>
     </dash-sparkbox>
 
-    <dash-chartbox name="topgross"></dash-chartbox>
-    <dash-chartbox name="notes"></dash-chartbox>
-    <dash-chartbox name="top10"></dash-chartbox>
-    <dash-chartbox name="popular"></dash-chartbox>
+    <dash-chartbox name="topgross">
+      <h3>Top Grossing</h3>
+    </dash-chartbox>
+    <dash-chartbox name="notes">
+      <h3>Notes</h3>
+    </dash-chartbox>
+    <dash-chartbox name="top10">
+      <h3>Top 10</h3>
+    </dash-chartbox>
+    <dash-chartbox name="popular">
+      <h3>Popular</h3>
+    </dash-chartbox>
 
 
   </template>
 
   <script>
+    _randomData = function(num, min, max) {
+      var arr = [];
+      for (var i=0, t=num; i<t; i++) {
+          arr.push(Math.round(Math.random() * (max - min + 1)) + min);
+      }
+      return arr;
+    };
 
     Polymer({
 
       is: 'dash-dashboard',
 
       attached: function() {
-        this.$.traffic.data = [1,5,4,8,3,2,2,6,8,3];
+        this.$.traffic.data = _randomData(30,1,40);
+        this.$['daily-revenue'].data = _randomData(30,80,150);
+        this.$['checkout-time'].data = _randomData(30,30,130);
+        this.$['fill-rate'].data = _randomData(30,0,95);
+
+
+
       }
 
     });
+
 
   </script>
 

@@ -1,0 +1,51 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/vaadin-icons/vaadin-icons.html">
+
+
+<!-- Element for displaying one panel on the dashboard <view></view>. -->
+<dom-module id="dash-panel">
+    <template>
+      <style>
+        .smaller {
+          width: 35px;
+          height: 35px;
+        }
+      </style>
+
+      <paper-card>
+        <paper-toolbar>
+          <div class="title">Label</div>
+          <paper-icon-button class="smaller" icon="vaadin-icons:expand"></paper-icon-button>
+          <paper-icon-button class="smaller" icon="icons:settings"></paper-icon-button>
+        </paper-toolbar>
+        <div class="card-content">
+          Content
+        </div>
+      </paper-card>
+
+    </template>
+
+    <script>
+    Polymer({
+        is: 'dash-panel',
+
+        // Fires when an instance of the element is created
+        created: function() {},
+
+        // Fires when the local DOM has been fully prepared
+        ready: function() {},
+
+        // Fires when the element was inserted into the document
+        attached: function() {},
+
+        // Fires when the element was removed from the document
+        detached: function() {},
+
+        // Fires when an attribute was added, removed, or updated
+        attributeChanged: function(name, type) {}
+    });
+    </script>
+</dom-module>

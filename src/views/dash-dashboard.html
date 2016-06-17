@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../elements/dash-sparklet.html">
+<link rel="import" href="../elements/dash-panel.html">
 
 
 <dom-module id="dash-dashboard">
@@ -56,6 +57,9 @@
       </div>
     </dash-sparkbox>
 
+    <div>
+      <dash-panel>Foobar</dash-panel>
+    </div>
     <dash-chartbox name="topgross">
       <h3>Top Grossing</h3>
     </dash-chartbox>
@@ -90,9 +94,6 @@
         this.$['daily-revenue'].data = _randomData(30,80,150);
         this.$['checkout-time'].data = _randomData(30,30,130);
         this.$['fill-rate'].data = _randomData(30,0,95);
-
-
-
       }
 
     });

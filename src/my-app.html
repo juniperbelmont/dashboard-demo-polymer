@@ -24,6 +24,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-iconset-svg/iron-iconset-svg.html">
 <link rel="import" href="../bower_components/vaadin-icons/vaadin-icons.html">
 
+<link rel="import" href="../bower_components/paper-styles/default-theme.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+
+
 <dom-module id="my-app">
 
   <template>
@@ -31,22 +35,46 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
 
       :host {
+
         display: block;
-        --app-primary-color: #4285f4;
+        --app-drawer-width: 110px;
+
+        --app-primary-color: magenta;
         --app-secondary-color: black;
+
+        --dark-theme-background-color: #414b56;
+        --dark-theme-base-color: #ffffff;
+        --dark-theme-text-color: #ffffff;
+        --dark-theme-secondary-color: #9ca5af;  /* for secondary text and icons */
+        --dark-theme-disabled-color: #646464;  /* disabled/hint text */
+        --dark-theme-divider-color: #3c3c3c;
+
+        --dark-theme-selected-background-color: #3a434d;
+
       }
 
       app-header-layout {
-        background-color: #f5f5f5;
       }
 
       app-header {
-        background-color: var(--app-primary-color);
-        color: #fff;
+        background-color: var(--dark-theme-background-color);
+        color: var(--dark-theme-text-color);
       }
 
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
+      app-drawer {
+        --app-drawer-content-container: {
+          background-color: var(--dark-theme-background-color);
+          color: var(--dark-theme-text-color);
+        };
+      }
+
+      app-drawer app-toolbar {
+        --app-toolbar-font-size: 12px;
+      }
+
+      /* This is the big screen mode. */
+      app-drawer[persistent] .drawer-list {
+        text-align: center;
       }
 
       .drawer-list {
@@ -57,11 +85,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding: 0 16px;
         line-height: 40px;
         text-decoration: none;
-        color: var(--app-secondary-color);
+
+        color: var(--dark-theme-secondary-color);
+
+        font-size: 11px;
+
+        /* Set line-height when sidebar is buttons. */
+        /* line-height: 1.3; */
       }
       .drawer-list a.iron-selected {
-        color: black;
-        font-weight: bold;
+        color: var(--dark-theme-text-color);
+        background-color: var(--dark-theme-selected-background-color);
+      }
+
+      .drawer-list a:hover {
+        color: var(--dark-theme-text-color);
       }
 
     </style>
@@ -77,7 +115,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <!-- Drawer content -->
       <app-drawer>
-        <app-toolbar>Menu</app-toolbar>
+        <app-toolbar>
+          <div title>Menu</div>
+        </app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <!-- Try to implement iron-pages with iron-selector at once. -->
           <a name="dashboard" href="/dashboard">Dashboard</a>

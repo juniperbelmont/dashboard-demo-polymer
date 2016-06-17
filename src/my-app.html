@@ -35,36 +35,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
 
       :host {
+        --sidebar-background-color: var(--app-dark-grey);
+        --sidebar-selected-background-color: var(--app-darker-grey);
+        --sidebar-text-color: var(--text-color-lightest);
+        --sidebar-secondary-color: var(--app-medium-grey);  /* for secondary text and icons */
 
         display: block;
-        --app-drawer-width: 110px;
 
-        --app-primary-color: magenta;
-        --app-secondary-color: black;
-
-        --dark-theme-background-color: #414b56;
-        --dark-theme-base-color: #ffffff;
-        --dark-theme-text-color: #ffffff;
-        --dark-theme-secondary-color: #9ca5af;  /* for secondary text and icons */
-        --dark-theme-disabled-color: #646464;  /* disabled/hint text */
-        --dark-theme-divider-color: #3c3c3c;
-
-        --dark-theme-selected-background-color: #3a434d;
-
-      }
-
-      app-header-layout {
       }
 
       app-header {
-        background-color: var(--dark-theme-background-color);
-        color: var(--dark-theme-text-color);
+        background-color: var(--sidebar-background-color);
+        color: var(--sidebar-text-color);
       }
 
       app-drawer {
+        --app-drawer-width: 110px;
+
+        --app-drawer-scrim-background: rgba(0, 0, 0, 0);
+
         --app-drawer-content-container: {
-          background-color: var(--dark-theme-background-color);
-          color: var(--dark-theme-text-color);
+          background-color: var(--sidebar-background-color);
+          color: var(--sidebar-text-color);
         };
       }
 
@@ -86,7 +78,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         line-height: 40px;
         text-decoration: none;
 
-        color: var(--dark-theme-secondary-color);
+        color: var(--sidebar-secondary-color);
 
         font-size: 11px;
 
@@ -94,12 +86,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         /* line-height: 1.3; */
       }
       .drawer-list a.iron-selected {
-        color: var(--dark-theme-text-color);
-        background-color: var(--dark-theme-selected-background-color);
+        color: var(--sidebar-text-color);
+        background-color: var(--sidebar-selected-background-color);
       }
 
       .drawer-list a:hover {
-        color: var(--dark-theme-text-color);
+        color: var(--sidebar-text-color);
       }
 
     </style>

@@ -9,18 +9,43 @@
 <dom-module id="dash-panel">
     <template>
       <style>
+        :host {
+          --panel-background-color: #ffffff;
+          --panel-text-color: var(--text-color-darkest);
+          --panel-label-color: var(--chart-blue);
+        }
+
         .smaller {
           width: 35px;
           height: 35px;
         }
+
+        paper-card {
+          border: 1px solid black;
+        }
+
+        .toolbar {
+          text-transform: uppercase;
+          line-height: 1.1;
+          font-weight: 500;
+          font-size: 14px;
+          letter-spacing: 0;
+
+          padding: 0 13px;
+
+          height: 37px;
+
+          color: var(--panel-label-color);
+        }
+
       </style>
 
       <paper-card>
-        <paper-toolbar>
-          <div class="title">Label</div>
+        <div class="toolbar">
+          Label
           <paper-icon-button class="smaller" icon="vaadin-icons:expand"></paper-icon-button>
           <paper-icon-button class="smaller" icon="icons:settings"></paper-icon-button>
-        </paper-toolbar>
+        </div>
         <div class="card-content">
           Content
         </div>

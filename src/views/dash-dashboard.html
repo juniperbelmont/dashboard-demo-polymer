@@ -20,31 +20,23 @@
       .sparkbox {
         width: 100%;
         margin: 16px 0;
-        /*
-        display: flex;
-        flex-flow: row wrap;
-        align-items: stretch;*/
       }
 
       .row {
-        /*flex: 1 1 auto;*/
+        margin: 0 0;
         display: flex;
       }
 
       dash-sparklet {
-        /*flex: 1 1 auto;*/
         min-width: 12em;
         display: inline-block;
       }
 
-      dash-chartbox {
-        display: block;
-        background-color: #ddd;
-        text-align: center;
-      }
-
       dash-panel {
-        margin: 16px 0;
+        display: block;
+        margin: 0 16px 16px 0;
+
+        min-width: 24em;
       }
     </style>
 
@@ -61,20 +53,29 @@
       </div>
     </div>
 
-    <dash-panel>Foobar</dash-panel>
-    <dash-chartbox name="topgross">
-      <h3>Top Grossing</h3>
-    </dash-chartbox>
-    <dash-chartbox name="notes">
-      <h3>Notes</h3>
-    </dash-chartbox>
-    <dash-chartbox name="top10">
-      <h3>Top 10</h3>
-    </dash-chartbox>
-    <dash-chartbox name="popular">
-      <h3>Popular</h3>
-    </dash-chartbox>
+    <div class="row">
+      <dash-panel id="top-grossing" label="Top Grossing Movies">
+        <div style="width: 50px; height: 50px; background-color: yellowgreen;">
+        </div>
+      </dash-panel>
 
+      <dash-panel id="notes" label="Notes">
+        <div style="width: 50px; height: 50px; background-color: gold;">
+        </div>
+      </dash-panel>
+    </div>
+
+    <div class="row">
+      <dash-panel id="top10" label="Top 10 Titles by Revenue">
+        <div style="width: 50px; height: 50px; background-color: lightcoral;">
+        </div>
+      </dash-panel>
+
+      <dash-panel id="popular" label="Popular Movies">
+        <div style="width: 50px; height: 50px; background-color: slateblue;">
+        </div>
+      </dash-panel>
+    </div>
 
   </template>
 

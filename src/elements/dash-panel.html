@@ -3,9 +3,9 @@
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/vaadin-icons/vaadin-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 
-
-<!-- Element for displaying one panel on the dashboard <view></view>. -->
+<!-- Element for displaying one panel on the dashboard view. -->
 <dom-module id="dash-panel">
     <template>
       <style>
@@ -13,6 +13,21 @@
           --panel-background-color: #ffffff;
           --panel-text-color: var(--text-color-darkest);
           --panel-label-color: var(--chart-blue);
+
+          --paper-card: {
+            border: 1px solid #c5c5c5;
+            border-radius: 4px;
+            width: 100%;
+
+          }
+
+          --paper-card-content: {
+              padding: 0;
+              margin: 0;
+              width: 100%;
+              height: 100%;
+          }
+
         }
 
         .smaller {
@@ -20,10 +35,7 @@
           height: 35px;
         }
 
-        paper-card {
-          border: 1px solid black;
-        }
-
+        /* TODO: Surround a lot of this in mixins with defaults available. */
         .toolbar {
           text-transform: uppercase;
           line-height: 1.1;
@@ -42,12 +54,15 @@
 
       <paper-card>
         <div class="toolbar">
-          Label
+          [[label]]
           <paper-icon-button class="smaller" icon="vaadin-icons:expand"></paper-icon-button>
           <paper-icon-button class="smaller" icon="icons:settings"></paper-icon-button>
         </div>
         <div class="card-content">
-          Content
+          <content>
+          <!-- TODO: add fallback content here. Something like,
+            "no content loaded" and be the full size of the panel. -->
+          </content>
         </div>
       </paper-card>
 
@@ -56,6 +71,10 @@
     <script>
     Polymer({
         is: 'dash-panel',
+
+        properties: {
+          label: String
+        },
 
         // Fires when an instance of the element is created
         created: function() {},
